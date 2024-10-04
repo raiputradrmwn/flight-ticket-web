@@ -1,4 +1,4 @@
-import React, { FC, use } from "react";
+import React, { FC } from "react";
 import { Metadata } from "next";
 import FormSignIn from "./form";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const SignInPage: FC<SignInPageProps> = ({}) => {
     return (
-        <FormSignIn/>
+        <FormSignIn />
     );
 };
 

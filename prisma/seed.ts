@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
 
-    const password = bcrypt.hashSync("admin", 10)
+    const password = bcrypt.hashSync("admin123", 10)
 
     const userSeed = await prisma.user.create({
         data: {

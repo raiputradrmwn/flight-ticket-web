@@ -3,18 +3,24 @@ import React, { FC } from "react";
 import { ActionResult, handelSignIn } from "./actions";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 interface FormSignInProps {}
 
 const initialFormState: ActionResult = {
   errorTitle: null,
   errorDesc: [],
-};
-
+}
+const SubmitButton = () => {
+  const {pending} = useFormStatus();
+  return (
+    <Button disabled={pending} className="w-full" type="submit">
+      {pending ? "Loading..." : "Sign In"}
+    </Button>
+  )
+}
 const FormSignIn: FC<FormSignInProps> = ({}) => {
   const [state, formAction] = useFormState(handelSignIn, initialFormState);
-  console.log(state);
   1
   return (
     <div className="w-full h-screen">
@@ -24,15 +30,22 @@ const FormSignIn: FC<FormSignInProps> = ({}) => {
             Sign in to your account
           </h2>
         </div>
-
+        {state.errorTitle !== null && (
+          <div className="mx-auto my-7 bg-red-500 w-[400px] p-4 rounded-lg text-white">
+          <div className="font-bold">{state.errorTitle}</div>
+          <ul className="list-disc list-inside">
+            {state.errorDesc?.map((values, index) => (
+              <li key={index}>{values}</li>   
+            ))}
+          </ul>
+        </div>
+        )}
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form action={formAction} className="space-y-6">
             <Input type="email" placeholder="Email" name="email"  />
             <Input type="password" placeholder="Password" name="password"/>
 
-            <Button className="w-full" type="submit">
-              Submit
-            </Button>
+            <SubmitButton />
           </form>
         </div>
       </div>
