@@ -44,7 +44,6 @@ const FormSignIn: FC<FormSignInProps> = ({}) => {
           <form action={formAction} className="space-y-6">
             <Input type="email" placeholder="Email" name="email"  />
             <Input type="password" placeholder="Password" name="password"/>
-
             <SubmitButton />
           </form>
         </div>

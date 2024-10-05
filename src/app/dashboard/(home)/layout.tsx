@@ -5,16 +5,26 @@ import Link from "next/link";
 import { BookOpenText, LogOut, Plane, Ticket, User } from "lucide-react";
 import { poppins } from "@/types/font";
 import ButtonLogout from "./components/button-logout";
+import { getUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 
 export const metadata: Metadata = {
   title: "Dashboard",
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const {session, user} = await getUser();
+
+  if (session == null || user.role == "COSTUMER") {
+    redirect("/dashboard/signin");
+  }
+
   return (
     <section className={`${poppins.className}`}>
       <nav className="border-b border-muted p-5">
