@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../../globals.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpenText, LogOut, Plane, Ticket, User } from "lucide-react";
+import { BookOpenText, Plane, Ticket, User } from "lucide-react";
 import { poppins } from "@/types/font";
 import ButtonLogout from "./components/button-logout";
 import { getUser } from "@/lib/auth";
@@ -26,7 +26,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <section className={`${poppins.className}`}>
+    <section>
       <nav className="border-b border-muted p-5">
         <div className="flex flex-row items-center justify-between">
           <span className="font-bold text-primary">Flysha Dashboard</span>
