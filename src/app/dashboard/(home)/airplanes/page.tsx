@@ -4,20 +4,23 @@ import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { columns } from './components/column-table'
+import { getAirplane } from './lib/data'
 
-export default function page() {
+export default async function AirplanePage() {
+  const planes = await getAirplane()
+  
   return (
     <>
     <div className='flex flex-row items-center justify-between'>
       <div className='my-5 text-2xl font-bold'>Airplane</div>
       <Button asChild>
-          <Link href={'/dashboard/create'}>
+          <Link href={'/dashboard/airplanes/create'}>
               <Plus className='mr-2 h-4 w-4'/>
               Tambah Data
           </Link>
       </Button>
     </div>
-    <DataTable columns={columns} data={[]}/>
+    <DataTable columns={columns} data={planes}/>
   </>
   )
 }
